@@ -4,7 +4,13 @@
 
 // g++ src/iterable_enum_main.cpp -std=c++11 -I include
 
-iterable_enum(TCP,(name1, 0x2), name2, name3, name4, (name5, 0x3));
+iterable_enum(TCP,
+  (name1, 0x2),
+   name2,
+   name3,
+   name4,
+  (name5, 0x3)
+);
 
 void foo(const TCP tcp) {
   std::cout << "FOO " << int(tcp);
