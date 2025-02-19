@@ -21,24 +21,24 @@
 
 #define RAW_ELEM_TO_ENUM_MEMBER(r, empty, RAW_ELEM) \
   BOOST_PP_IIF(                                     \
-    BOOST_PP_IS_BEGIN_PARENS(ELEM),                 \
+    BOOST_PP_IS_BEGIN_PARENS(RAW_ELEM),             \
     UNWRAP_PAIR_INTO_ASSIGNMENT,                    \
     IDENTITY                                        \
-  )(ELEM)
+  )(RAW_ELEM)
 
 #define RAW_ELEM_TO_ARRAY_MEMBER(r, NAMESPACE, RAW_ELEM) \
   BOOST_PP_IIF(                                          \
-    BOOST_PP_IS_BEGIN_PARENS(ELEM),                      \
+    BOOST_PP_IS_BEGIN_PARENS(RAW_ELEM),                  \
     CONCAT_NAMESPACE_WITH_FIRST_IN_PAIR,                 \
     CONCAT_NAMESPACE_WITH_RAW_ELEM                       \
-  )(NAMESPACE, ELEM)
+  )(NAMESPACE, RAW_ELEM)
 
 #define LIST_ELEMS_INSIDE_ENUM(RAW_ELEMS ...) \
   BOOST_PP_SEQ_ENUM(                          \
     BOOST_PP_SEQ_TRANSFORM(                   \
       RAW_ELEM_TO_ENUM_MEMBER,                \
       BOOST_PP_EMPTY,                         \
-      BOOST_PP_VARIADIC_TO_SEQ(ELEMS)         \
+      BOOST_PP_VARIADIC_TO_SEQ(RAW_ELEMS)     \
     )                                         \
   )
 
@@ -47,7 +47,7 @@
     BOOST_PP_SEQ_TRANSFORM(                         \
       RAW_ELEM_TO_ARRAY_MEMBER,                     \
       PREFIX,                                       \
-      BOOST_PP_VARIADIC_TO_SEQ(ELEMS)               \
+      BOOST_PP_VARIADIC_TO_SEQ(RAW_ELEMS)           \
     )                                               \
   )
 
